@@ -1,0 +1,23 @@
+nav {
+    background-color: #fafafa;
+    border:1px solid #aaa;
+    padding: 15px;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav li a {
+    color: #000;
+}
+
+nav li a.active {
+    color: darkred;
+}

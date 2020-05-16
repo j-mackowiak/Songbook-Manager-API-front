@@ -1,0 +1,31 @@
+.create-playlist-form>* {
+    width: 500px;
+    padding: 5px;
+    margin: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-div {
+    border: 1px solid #aaa;
+    padding: 5px;
+    text-align: center;
+    height: 10%;
+}
+
+.form-div > p {
+    margin:5px;
+}
+
+.form-div > button {
+    width: 300px;
+    height: 100px;
+}
+
+.introduction {
+    border: 1px solid #aaa;
+    padding: 7px;
+    text-align: center;
+    height: 100px;
+}

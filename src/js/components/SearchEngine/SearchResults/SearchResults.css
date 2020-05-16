@@ -1,0 +1,17 @@
+.results-list li {
+    border: 1px solid #aaa;
+    width: 300px;
+    text-align: center;
+}
+
+.result-list li :hover {
+    cursor: grab;
+}
+
+.results-list li a {
+    color: #000;
+}
+
+.results-list li a.active {
+    color: darkred;
+}
