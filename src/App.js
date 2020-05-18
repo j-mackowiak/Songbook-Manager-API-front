@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Route, BrowserRouter } from "react-router-dom";
 import './App.css';
 import Navbar from './js/components/NavBar/NavBar';
 import MainView from './js/components/MainView/MainView';
@@ -14,7 +14,7 @@ import CreatePlaylist from './js/components/CreatePlaylist/CreatePlaylist';
 
 function App() {
     return (
-      <Router>
+      <BrowserRouter basename="/Songbook-Manager-API-front">
           <Navbar />
           <main>
               <Route path={["/", "/songs"]} component={MainView} exact />
@@ -33,7 +33,7 @@ function App() {
 
 
           </main>
-      </Router>
+      </BrowserRouter>
   );
 }
 
