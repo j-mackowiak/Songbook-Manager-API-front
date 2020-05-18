@@ -87,7 +87,7 @@ class ConnectedAddSongView extends Component {
         this.setState({ errors });
     };
 
-    handleOnSubmit = e => {
+    handleOnFormSubmit = e => {
         e.preventDefault();
         const { title, authorName, categoryId, lyrics, guitarTabs, curio, errors } = this.state;
         const options = {
@@ -132,17 +132,40 @@ class ConnectedAddSongView extends Component {
         }
     }
 
+    handleOnFileSubmit = e => {
+        e.preventDefault();
+        const songFileInput = document.querySelector('#song-file-input');
+        const formData = new FormData();
+        formData.append('file', songFileInput.files[0]);
+        const options = {
+            method: "POST",
+            body: formData
+        }
+        fetch("https://stk-songbook.herokuapp.com/api/songs/upload", options)
+        .then(res => {
+            if(!res.ok) {throw res}
+            return res.json();
+        })
+        .then(res => {
+            this.setState({ songAdded: true, message: res.id })
+        })
+        .catch(err => {
+            console.log(err);
+            this.setState({songAdded: false, message: 'Incorrect file'});
+        })
+    }
+
     handleOnClick = e => {
         this.setState({ authorName: e.target.innerHTML });
     }
 
     render() {
         const { authorName, title, lyrics, guitarTabs, curio, categories, songAdded, errors, message } = this.state;
-        const {user} = this.props;
+        const { user } = this.props;
         if (!user.id) {
             return (
                 <div>
-                    <h3>You have to be logged in to create a playlist.</h3>
+                    <h3>You have to be logged in to add a song.</h3>
                     <Link to='/login'>Log In</Link> or <Link to='/register' >Register</Link>
                 </div>
             )
@@ -150,11 +173,11 @@ class ConnectedAddSongView extends Component {
             return (
                 <div>
                     <div className='introduction'>
-                    <h1>Add song form</h1>
-                    <p>Please fill in all the required fields to create a new song.</p>
+                        <h1>Add song form</h1>
+                        <p>Please fill in all the required fields to create a new song.</p>
                     </div>
-                    
-                    <form onSubmit={this.handleOnSubmit} id='add-song-form'>
+
+                    <form onSubmit={this.handleOnFormSubmit} id='add-song-form'>
                         <div className='form-div'>
                             <label> Title*:
                     <input type='text' name='title' id='title' placeholder='title' value={title} onChange={this.handleOnChange} onBlur={this.handleOnBlur} />
@@ -178,7 +201,7 @@ class ConnectedAddSongView extends Component {
                     <select id='categoryId' name="categoryId" onChange={this.handleOnChange} defaultValue='' onBlur={this.handleOnBlur}>
                                     <option value='' disabled > --- </option>
                                     {categories.map(category => (
-                                        <option key={category.id} value={category.id}>{category.name}</option>
+                                        <option className='generated-option' key={category.id} value={category.id}>{category.name}</option>
                                     ))}
                                 </select>
                             </label>
@@ -209,6 +232,14 @@ class ConnectedAddSongView extends Component {
                         {/* <textarea name='tags' id='tags' placeholder='List tags here. Make sure to add a # before each one' /> */}
                         <button type='submit'>Submit!</button>
                     </form >
+
+                    <p>OR alternatively you can add a song from a json file</p>
+
+                    <form id='song-from-file' onSubmit={this.handleOnFileSubmit}>
+                        <input type='file' accept=".json" id='song-file-input' />
+                        <button type='submit'>Upload!</button>
+                    </form>
+
                     {songAdded && <Alert status='success'>Song added. You can view it <Link to={`/songs/${message}`}>here</Link></Alert>}
                     {songAdded === false && <Alert status='error'>{message}</Alert>}
                 </div >

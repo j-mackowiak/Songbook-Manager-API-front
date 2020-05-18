@@ -17,7 +17,6 @@ class SearchBar extends Component {
 
     handleOnChange = e => {
         this.setState({ inputValue: e.target.value });
-
     }
 
     handleOnKeyUp = () => {
@@ -31,11 +30,11 @@ class SearchBar extends Component {
         const { type } = this.props;
         if (type === 'songsForPlaylists') {
             return (
-                <input type='text' placeholder={`Search songs`} value={inputValue} onChange={this.handleOnChange} onKeyUp={this.debounce(this.handleOnKeyUp, 750)} />
+                <input type='text' id='search-bar' placeholder={`Search songs`} value={inputValue} onChange={this.handleOnChange} onKeyUp={this.debounce(this.handleOnKeyUp, 750)} />
             )
         } else {
             return (
-                <input type='text' placeholder={`Search ${type}`} value={inputValue} onChange={this.handleOnChange} onKeyUp={this.debounce(this.handleOnKeyUp, 750)} />
+                <input type='text' id='search-bar' placeholder={`Search ${type}`} value={inputValue} onChange={this.handleOnChange} onKeyUp={this.debounce(this.handleOnKeyUp, 750)} />
             )
         }
     }

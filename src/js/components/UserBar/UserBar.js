@@ -23,7 +23,7 @@ function ConnectedUserBar (props) {
     }
 
     return(
-        <div id='user-bar'>Hello, {user.firstName}. <button onClick={handleLogOut}>Log Out</button></div>
+        <div id='user-bar'>Hello, {user.firstName}. <button id='logout-button' onClick={handleLogOut}>Log Out</button></div>
     )
 }
 

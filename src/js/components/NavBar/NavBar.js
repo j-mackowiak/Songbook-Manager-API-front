@@ -16,11 +16,11 @@ function ConnectedNavbar(props) {
                 {/* <li><NavLink to="/tags" activeClassName="active">Tags</NavLink></li> */}
                 <li><NavLink to="/categories" activeClassName="active">Categories</NavLink></li>
                 <li><NavLink to="/playlists" activeClassName="active">Playlists</NavLink></li>
-                {props.user.id && <li><NavLink to="/add" activeClassName="active">Add a song</NavLink></li>}
-                {props.user.id &&  <li><NavLink to="/create" activeClassName="active">Create a playlist</NavLink></li>}
-                {props.user.id && <li><NavLink to='/myPlaylists' activeClassName="active">My playlists</NavLink> </li>}
-                {!props.user.id && <li><NavLink to="/login" activeClassName="active">Log In</NavLink></li>}
-                {!props.user.id && <li><NavLink to="/register" activeClassName="active">Register</NavLink></li>}
+                {props.user.id && <li id="nav-add-li"><NavLink to="/add" activeClassName="active">Add a song</NavLink></li>}
+                {props.user.id &&  <li id="nav-create-li"><NavLink to="/create" activeClassName="active">Create a playlist</NavLink></li>}
+                {props.user.id && <li  id="nav-myPlaylists-li"><NavLink to='/myPlaylists' activeClassName="active">My playlists</NavLink> </li>}
+                {!props.user.id && <li id="nav-login-li"><NavLink to="/login" activeClassName="active">Log In</NavLink></li>}
+                {!props.user.id && <li id="nav-register-li"><NavLink to="/register" activeClassName="active">Register</NavLink></li>}
                 {props.user.id && <li><UserBar /></li>}
             </ul>
         </nav>

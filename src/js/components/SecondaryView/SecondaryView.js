@@ -21,8 +21,12 @@ class ConnectedSecondaryView extends Component {
                     .then(res => res.json())
                     .then(res => this.setState({ list: res }));
             }
-        } else {
+        } else if (url === "/playlists") {
             fetch(`https://stk-songbook.herokuapp.com/api${url}?limit=10`)
+                .then(res => res.json())
+                .then(res => this.setState({ list: res }));
+        } else {
+            fetch(`https://stk-songbook.herokuapp.com/api${url}`)
                 .then(res => res.json())
                 .then(res => this.setState({ list: res }));
         }
@@ -32,29 +36,6 @@ class ConnectedSecondaryView extends Component {
         const { list } = this.state;
         const url = this.props.match.url;
         const { user } = this.props;
-
-        // if (url === '/myPlaylist') {
-        //     if (!user.id) {
-        //         return (
-        //             <div>You have to be logged in to view this page. <Link to='/login'>Log In</Link> or <Link to='/register'>Register</Link></div>
-        //         )
-        //         } else if (!list[0]) {
-        //             return(
-        //                 <div>You haven't created any playlist. You can do so <Link to='/create'>here</Link>.</div>
-        //             )
-        //     } else {
-        //         return (
-        //             <>
-        //                 {/* <SearchEngine type='playlists' /> */}
-        //                 <h1>Your playlists:</h1>
-        //                 <ul>
-        //                     {list.map(playlist => (
-        //                         <li key={playlist.id}><Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link></li>
-        //                     ))}
-        //                 </ul>
-        //             </>
-        //         )
-        //     }
         if (url === '/myPlaylists') {
             if (!user.id) {
                 return <div>You have to be logged in to view this page. <Link to='/login'>Log In</Link> or <Link to='/register'>Register</Link></div>
@@ -63,7 +44,9 @@ class ConnectedSecondaryView extends Component {
             } else {
                 return (
                     <>
-                        <h1>My playlists:</h1>
+                        <div className='introduction'>
+                            <h1>My playlists:</h1>
+                        </div>
                         <ul>
                             {list.map(playlist => (
                                 <li key={playlist.id}><Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link></li>
@@ -78,10 +61,12 @@ class ConnectedSecondaryView extends Component {
                     return (
                         <>
                             <SearchEngine type='playlists' />
-                            <h1>Latest playlists:</h1>
+                            <div className='introduction'>
+                                <h1>Latest playlists:</h1>
+                            </div>
                             <ul>
                                 {list.map(playlist => (
-                                    <li key={playlist.id}><Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link></li>
+                                    <li key={playlist.id} className="playlist-list-li"><Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link></li>
                                 ))}
                             </ul>
                         </>
@@ -91,10 +76,12 @@ class ConnectedSecondaryView extends Component {
                     return (
                         <>
                             <SearchEngine type='songs' />
-                            <h1>Categories:</h1>
+                            <div className='introduction'>
+                                <h1>Categories:</h1>
+                            </div>
                             <ul>
                                 {list.map(category => (
-                                    <li key={category.id}><Link to={`/categories/${category.name}`}>{category.name}</Link></li>
+                                    <li key={category.id} className="category-list-li"><Link to={`/categories/${category.name}`}>{category.name}</Link></li>
                                 ))}
                             </ul>
                         </>

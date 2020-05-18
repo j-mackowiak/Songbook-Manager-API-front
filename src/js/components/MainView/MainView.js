@@ -21,10 +21,13 @@ class MainView extends Component {
             return (
                 <div id='main'>
                     <SearchEngine type='songs' />
+                    <div className='introduction'>
                     <h1>Latest songs: </h1>
+                    </div>
+
                     <ul>
                         {songs.map(song =>
-                            <li key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></li>)}
+                            <li className="song-list-li" key={song.id}><Link to={`/songs/${song.id}`}>{song.title}</Link></li>)}
                     </ul>
                 </div>
             )

@@ -79,7 +79,7 @@ class ConnectedLoginView extends Component {
                         <p>Logging in allows you to add songs and create your own playlists</p>
                     </div>
 
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} id='login-form'>
                         <div className='form-div'>
                         <label> E-mail:
                     <input type='email' name='email' id='email' placeholder='email' value={email} onChange={this.handleOnChange} />
@@ -88,12 +88,12 @@ class ConnectedLoginView extends Component {
 
                         <div className='form-div'>
                         <label> Password:
-                    <input type='text' name='password' id='password' placeholder='Password' value={password} onChange={this.handleOnChange} />
+                    <input type='password' name='password' id='password' placeholder='Password' value={password} onChange={this.handleOnChange} />
                         </label>
                         </div>
 
                         <div className='form-div'>
-                        <button type='submit'>Login</button>
+                        <button type='submit' id='login-submit'>Login</button>
                         </div>
 
                     </form>
