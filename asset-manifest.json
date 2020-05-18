@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Songbook-Manager-API-front/static/css/main.c407dd2e.chunk.css",
-    "main.js": "/Songbook-Manager-API-front/static/js/main.5e50199c.chunk.js",
-    "main.js.map": "/Songbook-Manager-API-front/static/js/main.5e50199c.chunk.js.map",
+    "main.js": "/Songbook-Manager-API-front/static/js/main.0e29d279.chunk.js",
+    "main.js.map": "/Songbook-Manager-API-front/static/js/main.0e29d279.chunk.js.map",
     "runtime-main.js": "/Songbook-Manager-API-front/static/js/runtime-main.5e05ffb8.js",
     "runtime-main.js.map": "/Songbook-Manager-API-front/static/js/runtime-main.5e05ffb8.js.map",
     "static/js/2.85ab2288.chunk.js": "/Songbook-Manager-API-front/static/js/2.85ab2288.chunk.js",
     "static/js/2.85ab2288.chunk.js.map": "/Songbook-Manager-API-front/static/js/2.85ab2288.chunk.js.map",
     "index.html": "/Songbook-Manager-API-front/index.html",
-    "precache-manifest.8b2a3cf0ea6ba2b4767111d1a208f549.js": "/Songbook-Manager-API-front/precache-manifest.8b2a3cf0ea6ba2b4767111d1a208f549.js",
+    "precache-manifest.46148ae179c62389f5027f70133dbb64.js": "/Songbook-Manager-API-front/precache-manifest.46148ae179c62389f5027f70133dbb64.js",
     "service-worker.js": "/Songbook-Manager-API-front/service-worker.js",
     "static/css/main.c407dd2e.chunk.css.map": "/Songbook-Manager-API-front/static/css/main.c407dd2e.chunk.css.map",
     "static/js/2.85ab2288.chunk.js.LICENSE.txt": "/Songbook-Manager-API-front/static/js/2.85ab2288.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.5e05ffb8.js",
     "static/js/2.85ab2288.chunk.js",
     "static/css/main.c407dd2e.chunk.css",
-    "static/js/main.5e50199c.chunk.js"
+    "static/js/main.0e29d279.chunk.js"
   ]
 }
