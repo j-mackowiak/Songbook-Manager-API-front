@@ -17,13 +17,14 @@ class ConnectedPlaylistView extends Component {
 
     componentDidMount() {
         const { playlistId } = this.props.match.params;
-        fetch(`https://stk-songbook.herokuapp.com/api/playlists/id/${playlistId}`)
+        fetch(`https://stk-songbook.herokuapp.com/api/playlists/id/${playlistId}?include_private=true`)
             .then(res => {
                 if (!res.ok) { throw res }
                 return res.json()
             })
             .then(res => this.setState({ playlist: res }))
             .catch(err => {
+                console.log(err);
                 switch (err.status) {
                     case 404: {
                         this.setState({ message: 'There is no such playlist' });
@@ -53,57 +54,60 @@ class ConnectedPlaylistView extends Component {
         const { user } = this.props;
         if (user.id === playlist.ownerId) {
             fetch(`https://stk-songbook.herokuapp.com/api/playlists/id/${playlist.id}`, { method: 'DELETE' })
-            .then(res => {
-                if(!res.ok) { throw res }
-                window.location='/playlists';
-            })
-            .catch(err => console.log(err));
+                .then(res => {
+                    if (!res.ok) { throw res }
+                    window.location = '/playlists';
+                })
+                .catch(err => console.log(err));
         }
     }
 
     handleDownload = e => {
-        const {playlist} = this.state;
+        const { playlist } = this.state;
         e.preventDefault();
         fetch(`https://stk-songbook.herokuapp.com/api/playlists/download/${playlist.id}`)
-        .then(res => {
-            if(!res.ok) {throw res};
-            return res;
-        })
-        .then(res => {
-            window.open(res.url);
-        })
-        .catch(err => {
-            console.log(err);
-            alert('Something went wrong');
-        })
-
+            .then(res => {
+                if (!res.ok) { throw res };
+                return res;
+            })
+            .then(res => {
+                window.open(res.url);
+            })
+            .catch(err => {
+                console.log(err);
+                alert('Something went wrong');
+            })
     }
 
     render() {
         const { playlist, owner, songs, message } = this.state;
         const { user } = this.props;
         if (playlist.songs) {
-            return (
-                <div id='main'>
-                    <h1>{playlist.name}</h1>
-                    <h2>Created by: {owner}</h2>
-                    <button id='download-playlist-button' onClick={this.handleDownload}>Download this playlist as PDF</button>
-                    {user.id === playlist.ownerId && <button onClick={this.handleDelete}>Delete this playlist</button>}
-                    <div id='song-list'>Songs: {songs.map(song => (
-                        <div id='single-song' key={song.id}>
-                            <h3>{song.title}</h3>
-                            <p>Guitar Tabs: {song.guitarTabs}</p>
-                            <p>Lyrics: {song.lyrics}</p>
-                            <p><Link to={`/songs/${song.id}`}>Song page</Link></p>
-                        </div>
-                    ))}</div>
-                </div>
-            )
+            if ((playlist.isPrivate && user.id === playlist.ownerId) || !playlist.isPrivate) {
+                return (
+                    <div id='main'>
+                        <h1>{playlist.name}</h1>
+                        <h2>Created by: {owner}</h2>
+                        <button id='download-playlist-button' onClick={this.handleDownload}>Download this playlist as PDF</button>
+                        {user.id === playlist.ownerId && <button onClick={this.handleDelete}>Delete this playlist</button>}
+                        <div id='song-list'>Songs: {songs.map(song => (
+                            <div id='single-song' key={song.id}>
+                                <h3>{song.title}</h3>
+                                <p>Guitar Tabs: {song.guitarTabs}</p>
+                                <p>Lyrics: {song.lyrics}</p>
+                                <p><Link to={`/songs/${song.id}`}>Song page</Link></p>
+                            </div>
+                        ))}</div>
+                    </div>
+                )
+            } else {
+                return <Alert status='error' >This playlist is private.</Alert>
+            }
         } else {
             return (
-            <>
-            {message && <Alert status='error' >{message}</Alert>}
-            {!message && <div>Loading...</div>}    
+                <>
+                    {message && <Alert status='error' >{message}</Alert>}
+                    {!message && <div>Loading...</div>}
                 </>
             )
         }
