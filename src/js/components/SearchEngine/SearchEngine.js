@@ -17,7 +17,7 @@ class SearchEngine extends Component {
         if (stuff) {
             switch (type) {
                 case "songs": {
-                    fetch(apiURL + `songs/title/${stuff}?limit=3`)
+                    fetch(apiURL + `songs/title/${stuff}`)
                         .then(res => {
                             if(!res.ok) {throw res};
                              return res.json();
@@ -27,13 +27,13 @@ class SearchEngine extends Component {
                     break;
                 }
                 case "authors": {
-                    fetch(apiURL + `authors/name/${stuff}?limit=3`)
+                    fetch(apiURL + `authors/name/${stuff}`)
                         .then(res => res.json())
                         .then(res => this.setState({ results: res, searched: true }));
                         break;
                 }
                 case "playlists": {
-                    fetch(apiURL + `playlists/name/${stuff}?limit=3`)
+                    fetch(apiURL + `playlists/name/${stuff}`)
                         .then(res => res.json())
                         .then(res => this.setState({ results: res, searched: true }));
                         break;
@@ -45,7 +45,7 @@ class SearchEngine extends Component {
                 //         break;
                 // }
                 case "songsForPlaylists": {
-                    fetch(apiURL + `songs/title/${stuff}?limit=3`)
+                    fetch(apiURL + `songs/title/${stuff}`)
                         .then(res => res.json())
                         .then(res => this.setState({ results: res, searched: true }));
                     break;

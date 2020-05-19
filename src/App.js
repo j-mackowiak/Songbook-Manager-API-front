@@ -30,8 +30,6 @@ function App() {
               <Route path="/categories/:filterName" component={FilteredView} />
               <Route path="/create" component={CreatePlaylist} />
               <Route path="/myPlaylists" component={SecondaryView} />
-
-
           </main>
       </BrowserRouter>
   );

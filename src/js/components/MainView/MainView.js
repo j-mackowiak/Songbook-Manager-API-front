@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SearchEngine from '../SearchEngine/SearchEngine';
 import './MainView.css';
-// import index from '../../redux/index';
 
 class MainView extends Component {
     state = {
@@ -10,7 +9,7 @@ class MainView extends Component {
     };
 
     componentDidMount() {
-        fetch('https://stk-songbook.herokuapp.com/api/songs?limit=10')
+        fetch('https://stk-songbook.herokuapp.com/api/songs/latest?limit=10')
             .then(res => res.json())
             .then(res => this.setState({ songs: res }));
     };
